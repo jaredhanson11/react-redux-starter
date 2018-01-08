@@ -1,0 +1,5 @@
+export const SELECT_NAVIGATION_ITEM = 'SELECT_NAVIGATION_ITEM';
+
+export default {
+    SELECT_NAVIGATION_ITEM
+};
