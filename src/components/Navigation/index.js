@@ -1,67 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import styleConfig from '../../config/styleConfig.js';
-
 import SiteLogo from './SiteLogo.jsx';
-import MobileMenuButton from './MobileMenuButton.jsx';
-import NavItems from './NavItems.jsx';
+import NavigationItems from './NavigationItems';
 
-const TopBar = styled.div`
+const NavigationWrapper = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: ${styleConfig.NAV_BAR_HEIGHT};
+
+    height: 50px;
     width: 100%;
 `;
 
-const SideBar = styled.div`
-    display: none;
-    top: ${styleConfig.NAV_BAR_HEIGHT};
-    right: 0;
-    width: 50%;
-    height: calc(100vh - ${styleConfig.NAV_BAR_HEIGHT});
-
-    ${styleConfig.devBorder('blue')}
-
-    ${styleConfig.MOBILE_MEDIA_QUERY} {
-        display: ${(props) => props.expanded ? 'flex;': 'none;'};
-        flex-direction: column;
-        align-items: center;
-   }
-`;
-
-export default class NavigationContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            sidebarExpanded: false
-        };
-    }
+export default class Navigation extends React.Component {
     render() {
         return(
-            <div>
-                <TopBar>
-                    <SiteLogo
-                        imgSrc={this.props.imgs.siteLogo}
-                    />
-                    <MobileMenuButton
-                        imgSrc={this.props.imgs.mobileMenuButton}
-                    />
-                    <NavItems
-                        items={this.props.items}
-                        activeItem={this.props.activeItem}
-                        selectItem={this.props.navigationActions.selectNavItem}
-                    />
-                </TopBar>
-                <SideBar expanded={this.state.sidebarExpanded}>
-                    <NavItems
-                        items={this.props.items}
-                        activeItem={this.props.activeItem}
-                        selectItem={this.props.navigationActions.selectNavItem}
-                    />
-                </SideBar>
-            </div>
+            <NavigationWrapper>
+                <SiteLogo
+                    imgSrc={this.props.navigationConfig.siteLogo.img}
+                    route={this.props.navigationConfig.siteLogo.route}
+                />
+                <NavigationItems
+                    items={this.props.navigationConfig.navigationItems}
+                    mobileMenuImg={this.props.navigationConfig.mobileMenuImg}
+                />
+            </NavigationWrapper>
         );
     }
 }

@@ -7,9 +7,7 @@ import {
 import Immutable from 'immutable';
 import styled from 'styled-components';
 
-import imgsConfig from './config/images.js';
-import navigationActionCreators from './actions/actionCreators/navigation.js';
-
+import navigationConfig from './config/navigation.js';
 import Navigation from './components/Navigation';
 
 const AppWrapper = styled.div`
@@ -27,17 +25,11 @@ const MainBodyWrapper = styled.div`
 
 class App extends React.Component {
     render() {
-        const navigationItems = ['Home', 'Music', 'Contact'];
-        const navigationImgs = {
-            mobileMenuButton: imgsConfig.getImgUrl('mobileMenuButton'),
-            siteLogo: imgsConfig.getImgUrl('siteLogo')
-        };
         return (
             <AppWrapper>
                 <Navigation
-                    items={navigationItems}
-                    imgs={navigationImgs}
-                    activeItem={this.props.navigationState.activeNavigationItem}
+                    navigationConfig={navigationConfig}
+                    navigationState={this.props.navigationState}
                     navigationActions={this.props.navigationActions}
                 />
                 <MainBodyWrapper>
@@ -56,11 +48,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    const navigationActions = {
-        selectNavItem: (navItem) => {
-            dispatch(actionCreators.navigation.selectNavItem(navItem));
-        }
-    };
+    const navigationActions = {};
 
     return {
         navigationActions

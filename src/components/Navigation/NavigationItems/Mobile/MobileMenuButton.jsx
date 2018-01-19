@@ -1,18 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import styleConfig from '../../config/styleConfig.js';
-
 const MobileMenuButtonWrapper = styled.div`
-    display: none;
+    display: flex;
     height: 100%;
-    padding-right: 10px;
-    padding-left: 10px;
     cursor: pointer;
-
-    ${styleConfig.MOBILE_MEDIA_QUERY} {
-        display: flex;
-    }
 `;
 
 const MobileMenuButtonImg = styled.img`
@@ -22,7 +14,7 @@ const MobileMenuButtonImg = styled.img`
 export default class MobileMenuButton extends React.Component {
     render(){
         return(
-            <MobileMenuButtonWrapper>
+            <MobileMenuButtonWrapper onClick={this.props.toggleNav} >
                 <MobileMenuButtonImg src={this.props.imgSrc} />
             </MobileMenuButtonWrapper>
         );
